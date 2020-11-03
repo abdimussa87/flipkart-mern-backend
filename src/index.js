@@ -1,7 +1,8 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
-import userRoutes from './routes/userRoutes.js';
+import authRoutes from './routes/authRoutes.js';
+import adminAuthRoutes from './routes/admin/adminAuthRoutes.js'
 
 // *Useful for getting environment vairables
 dotenv.config();
@@ -11,7 +12,8 @@ const app = express();
 // *middlewares
 
 app.use(express.json());
-app.use('/api', userRoutes);
+app.use('/api', authRoutes);
+app.use('/api', adminAuthRoutes)
 
 // *Database connection
 mongoose.connect(process.env.MONGO_DB_CONNECTION_STRING, {

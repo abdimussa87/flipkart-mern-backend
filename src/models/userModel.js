@@ -56,4 +56,8 @@ UserSchema.methods = {
     }
 }
 
+UserSchema.virtual('fullName').get(function () {
+    return `${this.firstName} ${this.lastName}`
+});
+
 export default mongoose.model('User', UserSchema)
