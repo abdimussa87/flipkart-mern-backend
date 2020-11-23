@@ -22,7 +22,7 @@ export const signup = (req, res) => {
     });
 }
 
-export const sigin = (req, res) => {
+export const signin = (req, res) => {
     UserCollection.findOne({ email: req.body.email }, (err, user) => {
         if (err) {
             res.status(500).json({ message: err })
