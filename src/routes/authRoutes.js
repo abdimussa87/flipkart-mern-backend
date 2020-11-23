@@ -1,5 +1,6 @@
 import express from 'express';
-import { signin, signup, isAuthorized } from '../controller/authController.js'
+import { signin, signup } from '../controller/authController.js'
+import { isAuthorized } from '../middlewares/middleware.js'
 import { signupValidator, signinValidator } from '../validators/authValidator.js';
 import { isRequestValidated } from '../validators/authValidator.js'
 
