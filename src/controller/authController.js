@@ -27,7 +27,7 @@ export const signin = (req, res) => {
         if (err) {
             res.status(500).json({ message: err })
         } else if (user) {
-            if (user.authenticate(req.body.password)) {
+            if (user.authenticate(req.body.password) && user.role === 'user') {
                 const token = jwt.sign({ _id: user._id, role: user.role }, process.env.JWT_SECRET, { expiresIn: '1h' });
                 const { _id, firstName, lastName, email, role, fullName } = user;
                 res.status(200).send({ token, user: { _id, firstName, lastName, email, role, fullName } })
