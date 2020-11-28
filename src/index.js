@@ -5,7 +5,8 @@ import authRoutes from './routes/authRoutes.js';
 import adminAuthRoutes from './routes/admin/adminAuthRoutes.js'
 import categoroyRoutes from './routes/categoryRoutes.js';
 import productRoutes from './routes/productRoutes.js';
-
+import cartRoutes from './routes/cartRoutes.js';
+import path from 'path'
 // *Useful for getting environment vairables
 dotenv.config();
 
@@ -14,10 +15,14 @@ const app = express();
 // *middlewares
 
 app.use(express.json());
+app.use("/public", express.static("./src/uploads"));
+
+
 app.use('/api', authRoutes);
-app.use('/api', adminAuthRoutes)
-app.use('/api', categoroyRoutes)
+app.use('/api', adminAuthRoutes);
+app.use('/api', categoroyRoutes);
 app.use('/api', productRoutes);
+app.use('/api', cartRoutes);
 
 // *Database connection
 mongoose.connect(process.env.MONGO_DB_CONNECTION_STRING, {

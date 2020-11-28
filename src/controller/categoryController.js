@@ -8,6 +8,9 @@ export const createCategory = (req, res) => {
     if (req.body.parentId) {
         categoryObject.parentId = req.body.parentId
     }
+    if (req.file) {
+        categoryObject.image = process.env.BASE_URL + "/public/" + req.file.filename
+    }
     CategoryCollection.create(categoryObject, (err, category) => {
         if (err) {
             res.status(500).send(err.message)
@@ -37,7 +40,7 @@ function sortCategories(categories, parentId) {
     }
 
     for (let cat of variyingCategoryList) {
-        categoriesList.push({ id: cat._id, name: cat.name, slug: cat.slug, children: sortCategories(categories, cat._id) })
+        categoriesList.push({ id: cat._id, name: cat.name, slug: cat.slug, image: cat.image, children: sortCategories(categories, cat._id) })
     }
 
     return categoriesList;
