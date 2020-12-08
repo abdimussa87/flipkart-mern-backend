@@ -15,7 +15,10 @@ export const signupValidator = [
         .withMessage('Email must be properly formatted'),
     check('password')
         .isLength({ min: 6 })
-        .withMessage('Password must be at least 6 characters long')
+        .withMessage('Password must be at least 6 characters long'),
+    check('password')
+        .isString()
+        .withMessage('Password must be string')
 ]
 
 export const signinValidator = [
@@ -26,6 +29,10 @@ export const signinValidator = [
     check('password')
         .notEmpty()
         .withMessage('Password can\'t be empty')
+    ,
+    check('password')
+        .isString()
+        .withMessage('Password must be string')
 ]
 
 export const isRequestValidated = (req, res, next) => {

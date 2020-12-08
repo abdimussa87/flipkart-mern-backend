@@ -6,7 +6,7 @@ import adminAuthRoutes from './routes/admin/adminAuthRoutes.js'
 import categoroyRoutes from './routes/categoryRoutes.js';
 import productRoutes from './routes/productRoutes.js';
 import cartRoutes from './routes/cartRoutes.js';
-import path from 'path'
+import cors from 'cors'
 // *Useful for getting environment vairables
 dotenv.config();
 
@@ -17,7 +17,7 @@ const app = express();
 app.use(express.json());
 app.use("/public", express.static("./src/uploads"));
 
-
+app.use(cors());
 app.use('/api', authRoutes);
 app.use('/api', adminAuthRoutes);
 app.use('/api', categoroyRoutes);
