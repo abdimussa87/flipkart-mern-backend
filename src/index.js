@@ -6,6 +6,7 @@ import adminAuthRoutes from './routes/admin/adminAuthRoutes.js'
 import categoroyRoutes from './routes/categoryRoutes.js';
 import productRoutes from './routes/productRoutes.js';
 import cartRoutes from './routes/cartRoutes.js';
+import initialDataRoutes from './routes/admin/initialData.js'
 import cors from 'cors'
 // *Useful for getting environment vairables
 dotenv.config();
@@ -23,6 +24,8 @@ app.use('/api', adminAuthRoutes);
 app.use('/api', categoroyRoutes);
 app.use('/api', productRoutes);
 app.use('/api', cartRoutes);
+app.use('/api', initialDataRoutes);
+
 
 // *Database connection
 mongoose.connect(process.env.MONGO_DB_CONNECTION_STRING, {
