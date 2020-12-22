@@ -44,14 +44,14 @@ const UserSchema = new mongoose.Schema({
     profilePicture: String
 }, { timestamps: true })
 
-// * the password used on virtual and in the argument of the function is the one coming from req.body
-UserSchema.virtual('password').set(function (password) {
-    this.hashPassword = bcrypt.hashSync(password, 10)
-});
+// // * the password used on virtual and in the argument of the function is the one coming from req.body
+// UserSchema.virtual('password').set(function (password) {
+//     this.hashPassword = bcrypt.hashSync(password, 10)
+// });
 
 UserSchema.methods = {
-    authenticate: function (password) {
-        return bcrypt.compareSync(password, this.hashPassword);
+    authenticate: async function (password) {
+        return await bcrypt.compare(password, this.hashPassword);
     }
 }
 

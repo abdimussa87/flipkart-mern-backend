@@ -1,14 +1,18 @@
 import UserCollection from '../../models/userModel.js';
 import jwt from 'jsonwebtoken';
+import bcrypt from 'bcrypt';
+import shortId from 'shortid'
 export const signup = (req, res) => {
     const { firstName, lastName, email, password } = req.body;
     // *Checking if user exists
-    UserCollection.findOne({ email: req.body.email }, (err, user) => {
+    const hashPassword = bcrypt.hash(password, 10)
+    UserCollection.findOne({ email: req.body.email }, async (err, user) => {
         if (user) {
             res.status(400).json({ message: 'Email already in use' })
         } else {
+            const hashPassword = await bcrypt.hash(password, 10);
             UserCollection.create({
-                firstName: firstName, lastName: lastName, email: email, password: password, username: Math.random().toString(), role: 'admin'
+                firstName: firstName, lastName: lastName, email: email, hashPassword, username: shortId.generate(), role: 'admin'
             }, (err, data) => {
                 if (err) {
                     res.status(500).send(err.message)

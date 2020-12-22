@@ -4,6 +4,7 @@ export const getInitialData = async (req, res) => {
     const categories = await CategoryCollection.find({}).exec();
     const products = await ProductCollection.find({})
         .select('_id name price quantity slug description productPictures category')
+        .populate({ path: 'category', select: '_id name' })
         .exec();
     const sortedCategories = sortCategories(categories);
     res.status(200).json({ categories: sortedCategories, products })
