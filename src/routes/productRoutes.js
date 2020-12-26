@@ -1,5 +1,5 @@
 import express from 'express';
-import { createProduct, getProducts } from '../controller/productController.js';
+import { createProduct, getProducts, getProductsBySlug } from '../controller/productController.js';
 import { isAdmin, isAuthorized } from '../middlewares/middleware.js'
 import multer from 'multer';
 import shortid from 'shortid';
@@ -21,4 +21,5 @@ const upload = multer({ storage: storage })
 
 router.post('/products', isAuthorized, isAdmin, upload.array('productPicture'), createProduct)
 router.get('/products', getProducts)
+router.get('/products/:slug', getProductsBySlug)
 export default router;
