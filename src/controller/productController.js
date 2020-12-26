@@ -26,4 +26,10 @@ export const createProduct = (req, res) => {
     })
 }
 
-export const getProducts = (req, res) => { }
+export const getProducts = async (req, res) => {
+    const products = await ProductCollection.find({})
+        .select('_id name price quantity slug description productPictures category')
+        .populate({ path: 'category', select: '_id name' })
+        .exec();
+    res.status(200).json(products);
+}
