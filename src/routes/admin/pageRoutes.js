@@ -2,7 +2,7 @@ import express from 'express'
 import multer from 'multer';
 import shortid from 'shortid';
 import path from 'path';
-import { createPage } from '../../controller/admin/pageController.js';
+import { createPage, getPage } from '../../controller/admin/pageController.js';
 import { isAdmin, isAuthorized } from '../../middlewares/middleware.js';
 
 const router = express.Router();
@@ -26,4 +26,6 @@ router.post('/admin/pages', isAuthorized, isAdmin,
         ]
     )
     , createPage);
+
+router.get('/pages/:category/:type', getPage);
 export default router;

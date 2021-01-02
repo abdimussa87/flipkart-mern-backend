@@ -40,7 +40,7 @@ function sortCategories(categories, parentId) {
     }
 
     for (let cat of variyingCategoryList) {
-        categoriesList.push({ id: cat._id, name: cat.name, parentId: cat.parentId, slug: cat.slug, image: cat.image, children: sortCategories(categories, cat._id) })
+        categoriesList.push({ id: cat._id, name: cat.name, parentId: cat.parentId, type: cat.type, slug: cat.slug, image: cat.image, children: sortCategories(categories, cat._id) })
     }
 
     return categoriesList;
