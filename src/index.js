@@ -7,6 +7,8 @@ import categoroyRoutes from './routes/categoryRoutes.js';
 import productRoutes from './routes/productRoutes.js';
 import cartRoutes from './routes/cartRoutes.js';
 import initialDataRoutes from './routes/admin/initialData.js'
+import pageRoutes from './routes/admin/pageRoutes.js'
+
 import cors from 'cors'
 // *Useful for getting environment vairables
 dotenv.config();
@@ -25,6 +27,8 @@ app.use('/api', categoroyRoutes);
 app.use('/api', productRoutes);
 app.use('/api', cartRoutes);
 app.use('/api', initialDataRoutes);
+app.use('/api', pageRoutes);
+
 
 
 // *Database connection
