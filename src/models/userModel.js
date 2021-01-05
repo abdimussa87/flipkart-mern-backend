@@ -49,11 +49,11 @@ const UserSchema = new mongoose.Schema({
 //     this.hashPassword = bcrypt.hashSync(password, 10)
 // });
 
-UserSchema.methods = {
-    authenticate: async function (password) {
-        return await bcrypt.compare(password, this.hashPassword);
-    }
-}
+// UserSchema.methods = {
+//     authenticate: async function (password) {
+//         return await bcrypt.compare(password, this.hashPassword);
+//     }
+// }
 
 UserSchema.virtual('fullName').get(function () {
     return `${this.firstName} ${this.lastName}`

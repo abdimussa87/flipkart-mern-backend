@@ -27,11 +27,12 @@ export const signup = (req, res) => {
 }
 
 export const signin = (req, res) => {
-    UserCollection.findOne({ email: req.body.email }, (err, user) => {
+    UserCollection.findOne({ email: req.body.email }, async (err, user) => {
         if (err) {
             res.status(500).json({ message: err })
         } else if (user) {
-            if (user.authenticate(req.body.password) && user.role === 'admin') {
+            const validCredential = await bcrypt.compare(req.body.password, user.hashPassword)
+            if (validCredential && user.role === 'admin') {
                 const token = jwt.sign({ _id: user._id, role: user.role }, process.env.JWT_SECRET, { expiresIn: '1d' });
                 const { _id, firstName, lastName, email, role, fullName } = user;
                 res.status(200).send({ token, user: { _id, firstName, lastName, email, role, fullName } })
