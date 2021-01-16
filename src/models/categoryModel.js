@@ -12,7 +12,8 @@ const CategorySchema = new mongoose.Schema({
         unique: true
     },
     type: {
-        type: String
+        type: String,
+        default: 'store'
     },
     image: {
         type: String,

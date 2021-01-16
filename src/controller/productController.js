@@ -43,7 +43,7 @@ export const getProductsBySlug = (req, res) => {
         } else if (categoryId) {
             ProductCollection.find({ category: categoryId }).exec((req, products) => {
                 if (err) {
-                    res.status(500).json({ error })
+                    res.status(500).json({ message: error })
                 } else if (products.length > 0) {
                     res.status(200).json({
                         products,
@@ -63,4 +63,19 @@ export const getProductsBySlug = (req, res) => {
             res.status(404).json({ message: "Not found" })
         }
     })
+}
+
+export const getProductById = (req, res) => {
+    const { productId } = req.params
+    if (productId) {
+        ProductCollection.findOne({ _id: productId }, (err, product) => {
+            if (err) {
+                res.status(500).json({ message: err })
+            } else if (product) {
+                res.status(200).json(product)
+            } else {
+                res.status(404).json({ message: 'Product not found' })
+            }
+        })
+    }
 }

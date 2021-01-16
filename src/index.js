@@ -35,7 +35,7 @@ app.use('/api', pageRoutes);
 mongoose.connect(process.env.MONGO_DB_CONNECTION_STRING, {
     useCreateIndex: true,
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
 }).then(value => console.log('Connected to db'));
 
 
